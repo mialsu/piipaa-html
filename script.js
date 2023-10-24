@@ -14,11 +14,10 @@ let correctGuessString = ""; // String to store correct guesses
 
 function checkGuess() {
     const guess = parseInt(guessInput.value);
-
-    if (isNaN(guess)) {
-        message.textContent = "Please enter a valid number.";
+    if (guess.toString().length !== 1 || isNaN(guess)) {
+        message.textContent = "Kirjota arvaukseksi yksi numero.";
     } else if (guess === piDigits[currentDigitIndex]) {
-        message.textContent = "Correct!";
+        message.textContent = "Oikein!";
         if (currentDigitIndex === 1) {
             correctGuessString += "," + guess.toString();
         } else {
@@ -26,17 +25,17 @@ function checkGuess() {
         }
         currentDigitIndex++;
         correctGuessCount++;
-        correctGuessesString.textContent = `Correct Guesses: ${correctGuessString}`;
-        numCorrectGuesses.textContent = `Number of Correct Guesses: ${correctGuessCount}`;
+        correctGuessesString.textContent = `${correctGuessString}`;
+        numCorrectGuesses.textContent = `Oikeita arvauksia: ${correctGuessCount}`;
 
         if (currentDigitIndex === piDigits.length) {
-            message.textContent = "You guessed all the digits of Pi correctly!";
+            message.textContent = "Hienoa! Arvasit oikein 100 000 piin desimaalia!";
             guessInput.disabled = true;
             guessButton.disabled = true;
             newGameButton.style.display = "block";
         }
     } else {
-        message.textContent = "Incorrect. Game Over!";
+        message.textContent = "Väärin!";
         guessInput.disabled = true;
         guessButton.disabled = true;
         newGameButton.style.display = "block";
@@ -57,7 +56,7 @@ newGameButton.addEventListener("click", () => {
     correctGuessString = "";
     message.textContent = "";
     correctGuessesString.textContent = "";
-    numCorrectGuesses.textContent = "Number of Correct Guesses: 0";
+    numCorrectGuesses.textContent = "Oikeita arvauksia: 0";
     guessInput.disabled = false;
     guessButton.disabled = false;
     newGameButton.style.display = "none";
@@ -65,3 +64,10 @@ newGameButton.addEventListener("click", () => {
 
 // Initially, hide the "New Game" button
 newGameButton.style.display = "none";
+
+// Add an event listener for the Enter key
+guessInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        checkGuess();
+    }
+});
