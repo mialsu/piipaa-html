@@ -15,18 +15,21 @@ let correctGuessString = ""; // String to store correct guesses
 function checkGuess() {
     const guess = parseInt(guessInput.value);
     if (guess.toString().length !== 1 || isNaN(guess)) {
-        message.textContent = "Kirjota arvaukseksi yksi numero.";
+        message.classList.value = ''
+        message.textContent = "Syötettävän arvon tulee olla yksi numero!";
     } else if (guess === piDigits[currentDigitIndex]) {
+        message.classList.value = ''
         message.textContent = "Oikein!";
-        if (currentDigitIndex === 1) {
-            correctGuessString += "," + guess.toString();
+        message.classList.add("text-green", "font-bold");
+        if (currentDigitIndex === 0) {
+            correctGuessString += "3," + guess.toString();
         } else {
             correctGuessString += guess;
         }
         currentDigitIndex++;
         correctGuessCount++;
         correctGuessesString.textContent = `${correctGuessString}`;
-        numCorrectGuesses.textContent = `Oikeita arvauksia: ${correctGuessCount}`;
+        numCorrectGuesses.textContent = `Desimaaleja oikein: ${correctGuessCount}`;
 
         if (currentDigitIndex === piDigits.length) {
             message.textContent = "Hienoa! Arvasit oikein 100 000 piin desimaalia!";
@@ -35,9 +38,12 @@ function checkGuess() {
             newGameButton.style.display = "block";
         }
     } else {
-        message.textContent = "Väärin!";
+        message.classList.value = ''
+        message.textContent = "Väärin! Jos haluat osallistua tällä tuloksella kisaan, näytä se Merille! Voit myös yrittää uudestaan.";
+        message.classList.add("text-red", "font-bold");
         guessInput.disabled = true;
         guessButton.disabled = true;
+        guessButton.style.display = "none";
         newGameButton.style.display = "block";
     }
 
@@ -56,9 +62,10 @@ newGameButton.addEventListener("click", () => {
     correctGuessString = "";
     message.textContent = "";
     correctGuessesString.textContent = "";
-    numCorrectGuesses.textContent = "Oikeita arvauksia: 0";
+    numCorrectGuesses.textContent = "Desimaaleja oikein: 0";
     guessInput.disabled = false;
     guessButton.disabled = false;
+    guessButton.style.display = "block";
     newGameButton.style.display = "none";
 });
 

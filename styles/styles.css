@@ -1,16 +1,14 @@
 /* Header container with full height */
 
-.header-container {
+.app-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full height of the viewport */
     background-image: url("../assets/bg-image.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    position: relative; /* Required for positioning the pseudo-element */
-    color: white; /* Text color on top of the background image */
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .content-container {
@@ -45,4 +43,44 @@
 }
 .mt-2 {
     margin-top: 8px !important;
+}
+
+.mt-4 {
+    margin-top: 16px !important;
+}
+
+.fs-20 {
+    font-size: 20px !important;
+}
+.fs-72 {
+    font-size: 72px !important;
+}
+.width-100 {
+    width: 100% !important;
+}
+
+.text-red {
+    color: #EC442A;
+}
+
+.text-green {
+    color: #357788
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.guess-button {
+    background-color: #357788 !important;
+    border:#357788 !important;
+}
+.new-game-button {
+    background-color: #EC442A !important;
+    border:#EC442A !important;
+}
+
+#correctGuesses {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
